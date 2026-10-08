@@ -1,13 +1,13 @@
 # week 1
 
-## Project Administration[cite: 37]
+## Project Administration
 
-* **Project Code:** PBL2627-CSE-B-037[cite: 38]
-* **Project Guide:** Er. Ram Babu Buri[cite: 37]
-  * **Research Area:** Machine Learning & Data Science[cite: 37]
-  * **Specializations:** Java, JSP–Servlet, Spring Boot, MySQL, Python[cite: 37]
+* **Project Code:** PBL2627-CSE-B-037
+* **Project Guide:** Er. Ram Babu Buri
+  * **Research Area:** Machine Learning & Data Science
+  * **Specializations:** Java, JSP–Servlet, Spring Boot, MySQL, Python
 
-### Team Members[cite: 37]
+### Team Members
 
 | Name | Roll No. | Enrollment No. | Email | Mobile |
 | :--- | :--- | :--- | :--- | :--- |
