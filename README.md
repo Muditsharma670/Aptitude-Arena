@@ -1,4 +1,4 @@
-# week 1[cite: 37]
+# week 1
 
 ## Project Administration[cite: 37]
 
