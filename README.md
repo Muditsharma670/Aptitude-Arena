@@ -216,16 +216,8 @@ CREATE TABLE attempt_answers (
 
 ## 3. User Interface Previews
 
-Aptitude Arena provides a clean, distraction-free interface designed specifically for competitive examination candidates. Below are previews of the core application modules:
+### C. Live Test Examination & Leaderboard Module
+Interactive test-taking environment featuring real-time question navigation, countdown timers, negative marking calculations, and national performance leaderboards (`TIMER`, `NAVIGATOR`, `LEADERBOARD`).
 
-### A. Candidate Dashboard & Activity Heatmap
-*Features real-time analytics tracking total questions solved, active study time, accuracy rate, and a 12-week preparation activity heatmap.*
-
-![Candidate Dashboard](image1.png)
-
----
-
-### B. Home Page & Adaptive Test Simulator
-*The main landing portal offering quick access to structured exam suites, official PYQ practice modules, and realistic test simulation parameters.*
-
-![Home Page & Simulator](image2.png)
+- [Aptitude Arena Test Environment & Leaderboard]
+![Test Environment](/image3.png)
