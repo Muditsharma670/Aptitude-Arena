@@ -216,20 +216,8 @@ CREATE TABLE attempt_answers (
 
 ## 3. User Interface Previews
 
-Aptitude Arena provides a clean, distraction-free interface designed specifically for competitive examination candidates. Below are previews of the core application modules:
+![Candidate Dashboard](image1.png)
 
-### A. Candidate Dashboard & Activity Heatmap
-*Features real-time analytics tracking total questions solved, active study time, accuracy rate, and a 12-week preparation activity heatmap.*
-
-<div align="center">
-  <img src="./image1.png" alt="Candidate Dashboard" width="90%"/>
-</div>
-
----
-
-### B. Home Page & Adaptive Test Simulator
-*The main landing portal offering quick access to structured exam suites, official PYQ practice modules, and realistic test simulation parameters.*
-
-<div align="center">
+![Home Page & Simulator](image2.png)
   <img src="./image2.png" alt="Home Page & Simulator" width="90%"/>
 </div>
