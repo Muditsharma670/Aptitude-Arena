@@ -103,15 +103,17 @@ The system utilizes Supabase PostgreSQL for robust, ACID-compliant relational da
 **6. ER Diagram**
 ![ER Diagram](./ER%20Diagram.png)
 
-
-
 # Week 4: Database Design & System Architecture
 
 ## 1. Relational Database Schema & ER Design (Supabase PostgreSQL)
 The platform utilizes a normalized relational database design to maintain data integrity and minimize redundancy across examination modules.
 
 <div align="center">
-  <img src="./database.jpeg" alt="Database ER Schema" width="90%"/>
+  <img src="./database.jpeg" alt="Database ER Schema Part 1" width="90%"/>
+</div>
+
+<div align="center">
+  <img src="./datbase.jpeg" alt="Database ER Schema Part 2" width="90%"/>
 </div>
 
 - **`exams` Table:** Stores metadata for national examinations (GATE, JEE, SSC, RAS, etc.) including title, slug, duration, total questions, and maximum marks.
