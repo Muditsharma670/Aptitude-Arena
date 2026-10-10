@@ -29,4 +29,3 @@ Ultimately, Aptitude Arena unifies these architectural layers into an interactiv
 
 
 
-#week2
