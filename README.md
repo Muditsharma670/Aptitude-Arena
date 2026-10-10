@@ -81,3 +81,24 @@ The system utilizes Supabase PostgreSQL for robust, ACID-compliant relational da
 - **Performance:** Fast response times for question retrieval and test submission endpoints under standard student concurrent loads.
 - **Security:** Password hashing via BCrypt, stateless JWT validation, global CORS configuration, and input sanitization.
 - **Deployment & Accessibility:** Fully deployed online with live frontend and backend endpoints accessible for evaluation.
+## week 3
+
+### Project Diagrams
+
+**1. Use Case Diagram**
+![Use Case Diagram](./1_use_case_diagram.png)
+
+**2. Class Diagram**
+![Class Diagram](./2_class_diagram.png)
+
+**3. Sequence Diagram**
+![Sequence Diagram](./3_sequence_diagram.png)
+
+**4. Activity Diagram**
+![Activity Diagram](./4_activity_diagram.png)
+
+**5. State Diagram**
+![State Diagram](./5_state_diagram.png)
+
+**6. ER Diagram**
+![ER Diagram](./6_er_diagram.png)
