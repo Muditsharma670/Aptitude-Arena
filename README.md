@@ -101,4 +101,4 @@ The system utilizes Supabase PostgreSQL for robust, ACID-compliant relational da
 ![State Diagram](./5_state_diagram.png)
 
 **6. ER Diagram**
-![ER Diagram](./6_er_diagram.png)
+![ER Diagram](./ER%20Diagram.png)
