@@ -220,4 +220,4 @@ CREATE TABLE attempt_answers (
 Interactive test-taking environment featuring real-time question navigation, countdown timers, negative marking calculations, and national performance leaderboards (`TIMER`, `NAVIGATOR`, `LEADERBOARD`).
 
 - [Aptitude Arena Test Environment & Leaderboard]
-![Test Environment](/image3.png)
+![Test Environment](./image3.png)
