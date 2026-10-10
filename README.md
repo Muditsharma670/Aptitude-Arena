@@ -221,8 +221,18 @@ Aptitude Arena provides a clean, distraction-free interface designed specificall
 ### A. Candidate Dashboard & Activity Heatmap
 *Features real-time analytics tracking total questions solved, active study time, accuracy rate, and a 12-week preparation activity heatmap.*
 
-![Candidate Dashboard](image1.png)
+<div align="center">
+  <img src="https://raw.githubusercontent.com/Muditsharma670/Aptitude-Arena/main/image1.png" alt="Candidate Dashboard" width="90%"/>
+</div>
 
+---
+
+### B. Home Page & Adaptive Test Simulator
+*The main landing portal offering quick access to structured exam suites, official PYQ practice modules, and realistic test simulation parameters.*
+
+<div align="center">
+  <img src="https://raw.githubusercontent.com/Muditsharma670/Aptitude-Arena/main/image2.png" alt="Home Page & Simulator" width="90%"/>
+</div>
 ---
 
 ### B. Home Page & Adaptive Test Simulator
