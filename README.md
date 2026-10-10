@@ -215,3 +215,10 @@ CREATE TABLE attempt_answers (
     selected_option_id UUID REFERENCES question_options(id),
     is_correct BOOLEAN
 );
+
+
+Diagram
+
+<img width="1320" height="1600" alt="image" src="https://github.com/user-attachments/assets/cfea1201-426d-44e6-bf6a-486537bfa9a7" />
+<img width="1320" height="1600" alt="image" src="https://github.com/user-attachments/assets/38c08cff-2774-4926-9d93-d3850e14a0fe" />
+
