@@ -28,4 +28,56 @@ The platform's underlying architecture leverages a high-performance Java Spring 
 Ultimately, Aptitude Arena unifies these architectural layers into an interactive Candidate Performance Dashboard. By combining real-time national leaderboards, daily streak tracking, and study activity heatmaps, the system employs behavioral habit-formation loops to maximize candidate consistency. This integration bridges the gap between raw testing and actionable psychometric evaluation, providing a secure, scalable, and adaptive testing ecosystem for competitive exam preparation.
 
 
+# Week 2
 
+## User Roles & Access Control
+Aptitude Arena enforces strict authentication and role management at the API layer utilizing Spring Security and stateless JSON Web Tokens (JWT).
+- **Student Candidate:** Can register/login, select from six competitive exam categories (GATE CSE, SSC CGL, RAS Rajasthan, JEE Main, CA Foundation, NEET UG), configure practice tests, submit responses, and view detailed scores and explanations.
+- **System Administrator:** Possesses elevated privileges to manage examination catalogues, oversee question banks, monitor system health, and verify deployment metrics across backend APIs.
+
+## SRS Document
+You can access the Project SRS [https://1drv.ms/b/c/762dc0e747d4c238/IQCMhlrBCAvIS7UA2KdzgDIJAYt8shqe_3SUruQnmLF1ERM?e=VcytoV)
+
+## Architecture & Core Modules
+The Aptitude Arena architecture operates as a distributed full-stack system, with a Spring Boot Java backend acting as the core REST API provider, a React + TypeScript (Vite) interactive frontend client, and a Supabase PostgreSQL persistent database.
+
+### Functional Modules & Team Responsibilities
+- **Module 1: User Authentication and Profile Management (Member 1)**
+  - **Focus:** Registration, login, identity and access security[cite: 57].
+  - **Frontend:** Login page, registration page, authentication forms, login errors, and user profile interface[cite: 57].
+  - **Backend:** `AuthController.java`, `AuthService.java`, `AppUserService.java`, JWT generation/validation, and `SecurityConfig.java`[cite: 57].
+  - **Database:** `app_users` table, user IDs, email, password hash (BCrypt), and user role[cite: 57].
+
+- **Module 2: Competitive Exam and Subject Management (Member 2)**
+  - **Focus:** Exams, subjects, searching, and examination selection across 6 national categories[cite: 58].
+  - **Frontend:** Exams page, exam cards, search and filters, and subject selection in practice modes[cite: 58].
+  - **Backend:** `ExamController.java`, `ExamService.java`, `SubjectController.java`, and `SubjectService.java`[cite: 58].
+  - **Database:** `exams`, `subjects`, and `exam_subjects` tables[cite: 58].
+
+- **Module 3: Question Bank and Practice Engine (Member 3)**
+  - **Focus:** MCQs, options, subject filtering, and practice session configuration (handling 600 original practice questions across exams)[cite: 59].
+  - **Frontend:** `PracticePage.tsx`, question display, answer options, question count, and difficulty selection[cite: 59].
+  - **Backend:** `QuestionController.java`, `QuestionService.java`, `QuestionRepository.java`, and `QuestionOptionRepository.java`[cite: 59].
+  - **Database:** `questions`, `question_options`, and `exam_questions` tables[cite: 59].
+
+- **Module 4: Test Attempts, Scoring and Results (Member 4)**
+  - **Focus:** Test submission, answer evaluation, and score calculation[cite: 60].
+  - **Frontend:** Submit confirmation modal, `QuizResultPage.tsx`, result display, correct/incorrect answers, and detailed explanations[cite: 60].
+  - **Backend:** `AttemptController.java`, `AttemptService.java`, `AttemptAnswerService.java`, and attempt/result DTOs[cite: 60].
+  - **Database:** `attempts` and `attempt_answers` tables[cite: 60].
+
+- **Module 5: Dashboard, Leaderboard, Papers and Deployment Integration (Member 5)**
+  - **Focus:** Connecting modules, cross-module integration, and operating the deployed application[cite: 61].
+  - **Frontend:** Shared navigation and layout, `DashboardPage.tsx`, `LeaderboardPage.tsx`, `PapersPage.tsx`, `AdminPage.tsx`, and API integration[cite: 61].
+  - **Backend:** Cross-module API integration, CORS configuration, performance verification, and security checks[cite: 61].
+  - **Deployment & Hosting:** Google AI Studio (frontend) and Render (backend API)[cite: 41].
+
+## Database Strategy (Supabase PostgreSQL)
+The system utilizes Supabase PostgreSQL for robust, ACID-compliant relational data storage:
+- **Core Tables:** `exams`, `subjects`, `questions`, `question_options`, `exam_subjects`, `exam_questions`, `app_users`, `attempts`, and `attempt_answers`.
+- **Integration:** Connected via Spring Data JPA and Hibernate with secure environment-based configurations.
+
+## Non-Functional Requirements
+- **Performance:** Fast response times for question retrieval and test submission endpoints under standard student concurrent loads.
+- **Security:** Password hashing via BCrypt, stateless JWT validation, global CORS configuration, and input sanitization.
+- **Deployment & Accessibility:** Fully deployed online with live frontend and backend endpoints accessible for evaluation.
