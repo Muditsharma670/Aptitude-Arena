@@ -102,3 +102,116 @@ The system utilizes Supabase PostgreSQL for robust, ACID-compliant relational da
 
 **6. ER Diagram**
 ![ER Diagram](./ER%20Diagram.png)
+
+
+
+# Week 4: Database Design & System Architecture
+
+## 1. System Architecture & Component Flow
+Aptitude Arena operates on a robust, distributed 3-tier architecture:
+- **Frontend Layer:** Built with React, TypeScript, and Vite, providing a seamless "Zero Slop" interface for students and administrators.
+- **API & Business Logic Layer:** Spring Boot (Java) REST controllers and services processing authentication, exam management, and test evaluations via secure HTTPS JSON endpoints.
+- **Persistent Storage Layer:** Supabase PostgreSQL database handling ACID-compliant relational data operations across user profiles, test papers, question banks, and evaluation logs.
+
+---
+
+## 2. Relational Database Schema (Supabase PostgreSQL)
+The platform utilizes a normalized relational database design to maintain data integrity and minimize redundancy across examination modules:
+
+- **`exams` Table:** Stores metadata for national examinations (GATE, JEE, SSC, RAS, etc.) including title, slug, duration, total questions, and maximum marks.
+- **`subjects` Table:** Categorizes domain subjects mapped to specific examinations.
+- **`exam_subjects` Table:** Junction table managing the many-to-many relationship between exams and subjects.
+- **`questions` Table:** Stores core question text, detailed step-by-step explanations, difficulty levels, allotted marks, negative marking rules, and source years.
+- **`exam_questions` Table:** Maps specific questions to respective exam papers with custom question ordering.
+- **`question_options` Table:** Holds multiple-choice options, option labels, option text, and correct answer flags for each question.
+- **`app_users` Table:** Manages user accounts, secure email handles, BCrypt password hashes, and role-based permissions (Student / Admin).
+- **`attempts` Table:** Records test session tracking, user IDs, linked exams, final computed scores, start timestamps, and submission timestamps.
+- **`attempt_answers` Table:** Tracks individual candidate responses, selected options, and correctness flags per test attempt.
+
+---
+
+## 3. PostgreSQL Database DDL Queries (Supabase Setup)
+
+Aap apne Supabase project ke SQL Editor mein in queries ko run karke complete schema setup kar sakte hain:
+
+```sql
+-- 1. EXAMS Table
+CREATE TABLE exams (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    name VARCHAR(255) NOT NULL,
+    slug VARCHAR(255) UNIQUE NOT NULL,
+    duration_minutes INT NOT NULL,
+    total_questions INT NOT NULL,
+    total_marks NUMERIC NOT NULL
+);
+
+-- 2. SUBJECTS Table
+CREATE TABLE subjects (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    name VARCHAR(255) NOT NULL,
+    description TEXT
+);
+
+-- 3. EXAM_SUBJECTS Table (Mapping)
+CREATE TABLE exam_subjects (
+    exam_id UUID REFERENCES exams(id) ON DELETE CASCADE,
+    subject_id UUID REFERENCES subjects(id) ON DELETE CASCADE,
+    PRIMARY KEY (exam_id, subject_id)
+);
+
+-- 4. QUESTIONS Table
+CREATE TABLE questions (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    subject_id UUID REFERENCES subjects(id) ON DELETE CASCADE,
+    question_text TEXT NOT NULL,
+    explanation TEXT,
+    difficulty VARCHAR(50),
+    marks NUMERIC NOT NULL,
+    negative_marks NUMERIC DEFAULT 0,
+    source_year INT
+);
+
+-- 5. EXAM_QUESTIONS Table (Mapping)
+CREATE TABLE exam_questions (
+    exam_id UUID REFERENCES exams(id) ON DELETE CASCADE,
+    question_id UUID REFERENCES questions(id) ON DELETE CASCADE,
+    question_order INT,
+    PRIMARY KEY (exam_id, question_id)
+);
+
+-- 6. QUESTION_OPTIONS Table
+CREATE TABLE question_options (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    question_id UUID REFERENCES questions(id) ON DELETE CASCADE,
+    option_label VARCHAR(10) NOT NULL,
+    option_text TEXT NOT NULL,
+    is_correct BOOLEAN DEFAULT FALSE
+);
+
+-- 7. APP_USERS Table
+CREATE TABLE app_users (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    password_hash VARCHAR(255) NOT NULL,
+    role VARCHAR(50) DEFAULT 'STUDENT'
+);
+
+-- 8. ATTEMPTS Table
+CREATE TABLE attempts (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID REFERENCES app_users(id) ON DELETE CASCADE,
+    exam_id UUID REFERENCES exams(id) ON DELETE CASCADE,
+    score NUMERIC,
+    started_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    submitted_at TIMESTAMP
+);
+
+-- 9. ATTEMPT_ANSWERS Table
+CREATE TABLE attempt_answers (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    attempt_id UUID REFERENCES attempts(id) ON DELETE CASCADE,
+    question_id UUID REFERENCES questions(id) ON DELETE CASCADE,
+    selected_option_id UUID REFERENCES question_options(id),
+    is_correct BOOLEAN
+);
