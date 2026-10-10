@@ -107,16 +107,12 @@ The system utilizes Supabase PostgreSQL for robust, ACID-compliant relational da
 
 # Week 4: Database Design & System Architecture
 
-## 1. System Architecture & Component Flow
-Aptitude Arena operates on a robust, distributed 3-tier architecture:
-- **Frontend Layer:** Built with React, TypeScript, and Vite, providing a seamless "Zero Slop" interface for students and administrators.
-- **API & Business Logic Layer:** Spring Boot (Java) REST controllers and services processing authentication, exam management, and test evaluations via secure HTTPS JSON endpoints.
-- **Persistent Storage Layer:** Supabase PostgreSQL database handling ACID-compliant relational data operations across user profiles, test papers, question banks, and evaluation logs.
+## 1. Relational Database Schema & ER Design (Supabase PostgreSQL)
+The platform utilizes a normalized relational database design to maintain data integrity and minimize redundancy across examination modules.
 
----
-
-## 2. Relational Database Schema (Supabase PostgreSQL)
-The platform utilizes a normalized relational database design to maintain data integrity and minimize redundancy across examination modules:
+<div align="center">
+  <img src="./database.jpeg" alt="Database ER Schema" width="90%"/>
+</div>
 
 - **`exams` Table:** Stores metadata for national examinations (GATE, JEE, SSC, RAS, etc.) including title, slug, duration, total questions, and maximum marks.
 - **`subjects` Table:** Categorizes domain subjects mapped to specific examinations.
@@ -130,7 +126,7 @@ The platform utilizes a normalized relational database design to maintain data i
 
 ---
 
-## 3. PostgreSQL Database DDL Queries (Supabase Setup)
+## 2. PostgreSQL Database DDL Queries (Supabase Setup)
 
 Aap apne Supabase project ke SQL Editor mein in queries ko run karke complete schema setup kar sakte hain:
 
@@ -215,10 +211,3 @@ CREATE TABLE attempt_answers (
     selected_option_id UUID REFERENCES question_options(id),
     is_correct BOOLEAN
 );
-
-
-Diagram
-
-<img width="1320" height="1600" alt="image" src="https://github.com/user-attachments/assets/cfea1201-426d-44e6-bf6a-486537bfa9a7" />
-<img width="1320" height="1600" alt="image" src="https://github.com/user-attachments/assets/38c08cff-2774-4926-9d93-d3850e14a0fe" />
-
