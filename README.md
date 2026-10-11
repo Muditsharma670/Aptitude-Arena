@@ -342,7 +342,7 @@ aptitude-arena-backend/
 Week 7: Frontend Innovation & Real-Time Exam Intelligence
 
 ## 1. Team Member Contributions
-### • Member 4: [Member 4 Name]
+### • Member 4: [Kartik]
 - *Interactive Test Simulator UI:* Developed the real-time exam-taking interface featuring question navigation palettes, status markers (Answered, Marked for Review, Unanswered), and bookmarking.
 - *Timer & Auto-Submission Logic:* Implemented synchronized countdown timers with local state persistence and automatic form submission upon time expiry.
 - *Result & Analytics Dashboard:* Built client-side visualization components to display score breakdowns, negative marking summaries, and detailed question-wise explanations.
