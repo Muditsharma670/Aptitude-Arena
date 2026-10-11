@@ -295,3 +295,46 @@ aptitude-arena/
     └── services/
 
 ```
+# Week 6: Advanced Analytics, Leaderboards & Admin Management Modules
+
+## 1. Team Member Contributions
+### • Member 2: [Member 2 Name]
+- **Leaderboard & Performance Analytics Module:** Developed backend calculation engines and APIs to rank users nationally, track attempt history, and compute accuracy and score metrics.
+- **Analytics Integration:** Built backend services to support user progress tracking, score summaries, and historical performance comparisons.
+
+### • Member 3: [Member 3 Name]
+- **Admin Exam & Question Management Module:** Implemented secure administrative REST APIs and controllers for managing exams, subjects, question banks, and answer keys.
+- **Content Operations Support:** Facilitated backend validation for dynamic question creation, option mapping, and database seed oversight.
+
+---
+
+## 2. Week 6 REST API Endpoints & Core Services
+
+### A. Member 2: Leaderboard & Analytics Module
+* **`GET /api/leaderboard/{examId}`** — Fetches the top-ranked candidates and performance metrics for a specific national examination.
+* **`GET /api/attempts/user/{userId}`** — Retrieves a candidate's complete history of test attempts, scores, and timestamps.
+* **`GET /api/analytics/summary/{userId}`** — Computes overall statistics including total tests taken, average accuracy, and total questions solved.
+
+### B. Member 3: Admin Question & Exam Management Module
+* **`POST /api/admin/exams`** — Allows administrators to create new national examination suites with custom durations and total marks.
+* **`POST /api/admin/questions`** — Secure endpoint for admins to add new questions, detailed explanations, and multiple-choice options with correct flags.
+* **`PUT /api/admin/questions/{questionId}`** — Updates existing question text, difficulty levels, or allotted marks.
+* **`DELETE /api/admin/exams/{examId}`** — Removes outdated examination records and cascades dependent question mappings.
+
+---
+
+## 3. Project Directory Structure Update (Week 6 Additions)
+
+```text
+aptitude-arena-backend/
+└── src/
+    └── main/
+        └── java/com/aptitudearena/backend/
+            ├── controller/
+            │   ├── LeaderboardController.java  # Member 2: National rankings & score stats
+            │   ├── AnalyticsController.java    # Member 2: Candidate attempt history & summary
+            │   └── AdminExamController.java    # Member 3: Admin CRUD for exams & questions
+            └── service/
+                ├── LeaderboardService.java     # Leaderboard calculation business logic
+                ├── AnalyticsService.java       # User performance data aggregation
+                └── AdminService.java           # Administrative content management logic
