@@ -339,6 +339,9 @@ aptitude-arena-backend/
                 ├── AnalyticsService.java       # User performance data aggregation
                 └── AdminService.java           # Administrative content management logic
 
+
+
+
 # Week 7: Frontend Exam Simulator, Real-time Timer & Result Analytics Module
 
 ## 1. Team Member Contributions
