@@ -339,7 +339,7 @@ aptitude-arena-backend/
                 ├── AnalyticsService.java       # User performance data aggregation
                 └── AdminService.java           # Administrative content management logic
 
-Week 7: Frontend Innovation & Real-Time Exam Intelligence
+# Week 7: Frontend Innovation & Real-Time Exam Intelligence
 
 ## 1. Team Member Contributions
 ### • Member 4: [Kartik]
