@@ -339,10 +339,13 @@ aptitude-arena-backend/
                 ├── AnalyticsService.java       # User performance data aggregation
                 └── AdminService.java           # Administrative content management logic
 
+
 # Week 7: Frontend Exam Simulator, Real-time Timer & Result Analytics Module
 
 ## 1. Team Member Contributions
-### • Member 4: [Member 4 Name]
+
+### Member 4: [Member 4 Name]
+
 - **Interactive Test Simulator UI:** Developed the real-time exam-taking interface featuring question navigation palettes, status markers (Answered, Marked for Review, Unanswered), and bookmarking.
 - **Timer & Auto-Submission Logic:** Implemented synchronized countdown timers with local state persistence and automatic form submission upon time expiry.
 - **Result & Analytics Dashboard:** Built client-side visualization components to display score breakdowns, negative marking summaries, and detailed question-wise explanations.
@@ -351,10 +354,10 @@ aptitude-arena-backend/
 
 ## 2. Week 7 Frontend Components & Services
 
-* **`ExamSimulator.tsx`**: Main container managing active test states, question switching, and event handlers.
-* **`QuestionPalette.tsx`**: Interactive grid showing question statuses (Attempted, Unattempted, Marked for Review) for quick navigation.
-* **`TimerDisplay.tsx`**: Handles real-time countdown tracking, visual warnings for low time, and triggers auto-submission.
-* **`ResultPage.tsx`**: Displays post-test analytics, total computed score, accuracy percentage, and correct/incorrect answers review.
+- **`ExamSimulator.tsx`:** Main container managing active test states, question switching, and event handlers.
+- **`QuestionPalette.tsx`:** Interactive grid showing question statuses for quick navigation.
+- **`TimerDisplay.tsx`:** Handles real-time countdown tracking, visual warnings for low time, and auto-submission.
+- **`ResultPage.tsx`:** Displays post-test analytics, total computed score, accuracy percentage, and answer review.
 
 ---
 
@@ -365,12 +368,13 @@ aptitude-arena/
 └── src/
     ├── components/
     │   ├── exam/
-    │   │   ├── ExamSimulator.tsx     # Main live test container & event handlers
-    │   │   ├── QuestionPalette.tsx   # Question navigation grid (Visited/Answered status)
-    │   │   └── TimerDisplay.tsx      # Real-time countdown timer component
+    │   │   ├── ExamSimulator.tsx
+    │   │   ├── QuestionPalette.tsx
+    │   │   └── TimerDisplay.tsx
     │   └── results/
-    │       ├── ScoreCard.tsx         # Final score & rank summary card
-    │       └── SolutionReview.tsx    # Question-wise explanation & correct option viewer
+    │       ├── ScoreCard.tsx
+    │       └── SolutionReview.tsx
     └── pages/
-        ├── ResultPage.tsx            # Post-exam analytics view
-        └── PracticePage.tsx          # Exam workspace entry point
+        ├── ResultPage.tsx
+        └── PracticePage.tsx
+```
