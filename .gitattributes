@@ -1,0 +1,5 @@
+# TypeScript UI components ko documentation ya vendored mark kar do taaki percentage kam ho
+aptitude-arena/** linguist-vendored
+
+# Java codebase ko primary linguist language force karo
+aptitude-arena-backend-render/** linguist-detectable=true
