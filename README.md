@@ -389,8 +389,8 @@ aptitude-arena/
 **`Database & Governance`:** Designed database tables to record user roles, security mappings, flag reports, and moderation action history logs.
 Problems & Challenges Faced
 **`Privilege Escalation Risks`:** Ensuring security filters prevented regular users from forging tokens or tricking parameters to access admin controllers.
-**Bulk Action Transaction Safety:** Moderating or hiding multiple spam posts simultaneously without locking database collections or breaking search indexes.
-**Real-Time UI State Sync:** Ensuring that when content is flagged or hidden by a moderator, the change immediately reflects on the live public feeds without leaving broken or dead links for readers.
+**`Bulk Action Transaction Safety`:** Moderating or hiding multiple spam posts simultaneously without locking database collections or breaking search indexes.
+**`Real-Time UI State Sync`:** Ensuring that when content is flagged or hidden by a moderator, the change immediately reflects on the live public feeds without leaving broken or dead links for readers.
 What They Completed
 A complete Moderation & Administrative Portal for community governance.
 Role-Based Access Control (RBAC) security configuration for endpoints and UI views.
