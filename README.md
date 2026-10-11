@@ -381,16 +381,16 @@ aptitude-arena/
 ```
 # Week 8
 ## 5. Member 5: Moderator Dashboard & Platform Governance
-Role & Scope of Work
-Member 5 built the administrative control center, ensuring platform compliance, user access management, and content quality control.
+## Role & Scope of Work
+## Member 5 built the administrative control center, ensuring platform compliance, user access management, and content quality control.
 
-Frontend (User Interface & State): Built an administrative management portal with reported content queues, user management tables, article review panels, role-assignment toggles, and system metrics widgets.
-Backend (API Logic): Enforced strict Role-Based Access Control (RBAC) security filters (ensuring only verified administrative tokens can execute privileged actions), developed moderation management APIs, and built audit logging services.
-Database & Governance: Designed database tables to record user roles, security mappings, flag reports, and moderation action history logs.
+**Frontend (User Interface & State):** Built an administrative management portal with reported content queues, user management tables, article review panels, role-assignment toggles, and system metrics widgets.
+**Backend (API Logic):** Enforced strict Role-Based Access Control (RBAC) security filters (ensuring only verified administrative tokens can execute privileged actions), developed moderation management APIs, and built audit logging services.
+**Database & Governance:** Designed database tables to record user roles, security mappings, flag reports, and moderation action history logs.
 Problems & Challenges Faced
-Privilege Escalation Risks: Ensuring security filters prevented regular users from forging tokens or tricking parameters to access admin controllers.
-Bulk Action Transaction Safety: Moderating or hiding multiple spam posts simultaneously without locking database collections or breaking search indexes.
-Real-Time UI State Sync: Ensuring that when content is flagged or hidden by a moderator, the change immediately reflects on the live public feeds without leaving broken or dead links for readers.
+**Privilege Escalation Risks:** Ensuring security filters prevented regular users from forging tokens or tricking parameters to access admin controllers.
+**Bulk Action Transaction Safety:** Moderating or hiding multiple spam posts simultaneously without locking database collections or breaking search indexes.
+**Real-Time UI State Sync:** Ensuring that when content is flagged or hidden by a moderator, the change immediately reflects on the live public feeds without leaving broken or dead links for readers.
 What They Completed
 A complete Moderation & Administrative Portal for community governance.
 Role-Based Access Control (RBAC) security configuration for endpoints and UI views.
