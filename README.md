@@ -298,11 +298,11 @@ aptitude-arena/
 # Week 6: Advanced Analytics, Leaderboards & Admin Management Modules
 
 ## 1. Team Member Contributions
-### • Member 2: [Member 2 Name]
+### • Member 2: [Piyush]
 - **Leaderboard & Performance Analytics Module:** Developed backend calculation engines and APIs to rank users nationally, track attempt history, and compute accuracy and score metrics.
 - **Analytics Integration:** Built backend services to support user progress tracking, score summaries, and historical performance comparisons.
 
-### • Member 3: [Member 3 Name]
+### • Member 3: [Kushagra Garg]
 - **Admin Exam & Question Management Module:** Implemented secure administrative REST APIs and controllers for managing exams, subjects, question banks, and answer keys.
 - **Content Operations Support:** Facilitated backend validation for dynamic question creation, option mapping, and database seed oversight.
 
@@ -345,7 +345,7 @@ aptitude-arena-backend/
 
 ## 1. Team Member Contributions
 
-### Member 4: [Member 4 Name]
+### Member 4: [Kartik]
 
 - **Interactive Test Simulator UI:** Developed the real-time exam-taking interface featuring question navigation palettes, status markers (Answered, Marked for Review, Unanswered), and bookmarking.
 - **Timer & Auto-Submission Logic:** Implemented synchronized countdown timers with local state persistence and automatic form submission upon time expiry.
