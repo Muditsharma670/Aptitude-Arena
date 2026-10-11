@@ -355,7 +355,7 @@ aptitude-arena-backend/
 
 ## 2. Week 7 Frontend Components & Services
 
-- **`ExamSimulator.tsx`:** Main container managing active test states, question switching, and event handlers.
+- **`ExamSimulator.tsx`:** Main container managing active test states, question switching, and event handlers. 
 - **`QuestionPalette.tsx`:** Interactive grid showing question statuses for quick navigation.
 - **`TimerDisplay.tsx`:** Handles real-time countdown tracking, visual warnings for low time, and auto-submission.
 - **`ResultPage.tsx`:** Displays post-test analytics, total computed score, accuracy percentage, and correct/incorrect answers review.
@@ -384,11 +384,11 @@ aptitude-arena/
 ## Role & Scope of Work
 ## Member 5 built the administrative control center, ensuring platform compliance, user access management, and content quality control.
 
-**Frontend (User Interface & State):** Built an administrative management portal with reported content queues, user management tables, article review panels, role-assignment toggles, and system metrics widgets.
-**Backend (API Logic):** Enforced strict Role-Based Access Control (RBAC) security filters (ensuring only verified administrative tokens can execute privileged actions), developed moderation management APIs, and built audit logging services.
-**Database & Governance:** Designed database tables to record user roles, security mappings, flag reports, and moderation action history logs.
+**`Frontend (User Interface & State)`:** Built an administrative management portal with reported content queues, user management tables, article review panels, role-assignment toggles, and system metrics widgets.
+**`Backend (API Logic)`:** Enforced strict Role-Based Access Control (RBAC) security filters (ensuring only verified administrative tokens can execute privileged actions), developed moderation management APIs, and built audit logging services.
+**`Database & Governance`:** Designed database tables to record user roles, security mappings, flag reports, and moderation action history logs.
 Problems & Challenges Faced
-**Privilege Escalation Risks:** Ensuring security filters prevented regular users from forging tokens or tricking parameters to access admin controllers.
+**`Privilege Escalation Risks`:** Ensuring security filters prevented regular users from forging tokens or tricking parameters to access admin controllers.
 **Bulk Action Transaction Safety:** Moderating or hiding multiple spam posts simultaneously without locking database collections or breaking search indexes.
 **Real-Time UI State Sync:** Ensuring that when content is flagged or hidden by a moderator, the change immediately reflects on the live public feeds without leaving broken or dead links for readers.
 What They Completed
