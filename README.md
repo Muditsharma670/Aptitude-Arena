@@ -340,6 +340,7 @@ aptitude-arena-backend/
                 └── AdminService.java           # Administrative content management logic
 
 
+```
 # Week 7: Frontend Exam Simulator, Real-time Timer & Result Analytics Module
 
 ## 1. Team Member Contributions
@@ -357,7 +358,7 @@ aptitude-arena-backend/
 - **`ExamSimulator.tsx`:** Main container managing active test states, question switching, and event handlers.
 - **`QuestionPalette.tsx`:** Interactive grid showing question statuses for quick navigation.
 - **`TimerDisplay.tsx`:** Handles real-time countdown tracking, visual warnings for low time, and auto-submission.
-- **`ResultPage.tsx`:** Displays post-test analytics, total computed score, accuracy percentage, and answer review.
+- **`ResultPage.tsx`:** Displays post-test analytics, total computed score, accuracy percentage, and correct/incorrect answers review.
 
 ---
 
