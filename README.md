@@ -7,7 +7,7 @@
 * **Project Guide:** Er. Ram Babu Buri
   * **Research Area:** Machine Learning & Data Science
   * **Specializations:** Java, JSP–Servlet, Spring Boot, MySQL, Python
-
+  * **Project Link:**https://aptitude-arena.ai.studio 
 ### Team Members
 
 | Name | Roll No. | Enrollment No. | Email | Mobile |
@@ -424,7 +424,7 @@ What They Completed
 Unified Search & Feed Integration Test Suite validating search filters, multi-tag queries, and pagination.
 Automated Cache Invalidation Hooks connecting Editor publishing and Moderator actions directly to home feed cache clears.
 Load & Performance Benchmark Report proving the Home feed responds within target SLAs (<200ms) under heavy concurrent read traffic.
-## #2. Member 2: Editor & Content Pipeline Integration Lead
+## 2. Member 2: Editor & Content Pipeline Integration Lead
 Integration & Testing Role
 Write Pipeline, End-to-End Content Lifecycle, & Security Audit Lead.
 
