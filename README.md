@@ -402,3 +402,101 @@ Module	Team Member Scope	Primary Focus	Key Deliverable
 3. User Profile / Portfolio	End-to-End	Identity, Aggregation, Third-Party APIs	Live Developer Portfolio, GitHub Integration
 4. Moderator Dashboard	End-to-End	RBAC Security, Content Flags, Admin Logs	Governance Portal, Access Controls
 5. AI Functionality	End-to-End	LLM Microservice, Text Parsing, Async Jobs	Automated Summarizer, Smart Tag Generator
+
+# Week 9
+When moving from individual module development to System Integration & End-to-End (E2E) Testing, the focus shifts from isolated unit testing to verifying cross-module data flows, inter-service contracts, security enforcement, performance SLAs, and system resilience.
+
+In this phase, each team member takes on an Integration & Testing Lead role for their respective domain, working together to ensure all five modules function as a unified, production-ready system.
+
+## 1. Member 1: Home Page & Search Engine Integration Lead
+Integration & Testing Role
+Feed Synchronization, Search Contract, & High-Traffic Load Testing Lead.
+
+Work & Scope
+Cross-Module Feed Integration: Integrated the Home Page feed with Member 2's published articles, Member 4's moderation status flags (ensuring hidden posts instantly disappear), and Member 5's AI-generated summaries and tags.
+API Contract Testing: Verified that the JSON response schemas sent by the Java backend match the feed state expected by the React frontend across all device viewports.
+Performance & Load Testing: Conducted simulated stress testing (using tools like JMeter or K6) to measure search latency, pagination speeds, and server resource usage under hundreds of concurrent virtual readers.
+Problems Faced During Integration
+Stale Cache & Search Index Lag: Newly published articles from Member 2's Editor took several minutes to appear in Home search results due to outdated cache invalidation rules.
+Null Pointer Rendering Crashes: When rendering article cards that were still undergoing AI summary generation by Member 5, the frontend feed crashed due to missing or null summary fields.
+Moderation Status Leakage: Articles flagged or hidden by Member 4 in the Moderator Dashboard were still appearing in search results because search indexes were not refreshing upon moderation state changes.
+What They Completed
+Unified Search & Feed Integration Test Suite validating search filters, multi-tag queries, and pagination.
+Automated Cache Invalidation Hooks connecting Editor publishing and Moderator actions directly to home feed cache clears.
+Load & Performance Benchmark Report proving the Home feed responds within target SLAs (<200ms) under heavy concurrent read traffic.
+## #2. Member 2: Editor & Content Pipeline Integration Lead
+Integration & Testing Role
+Write Pipeline, End-to-End Content Lifecycle, & Security Audit Lead.
+
+Work & Scope
+Pipeline Orchestration: Connected the Editor’s publish action to automatically trigger Member 5's AI summary generation queue, update Member 1's Home feed indexes, and increment Member 3's author statistics.
+Security & Penetration Testing: Executed security tests targeting Cross-Site Scripting (XSS), script injection through code blocks, and unauthorized edit/delete payload manipulations.
+Data Consistency Verification: Ensured complex documents containing custom Markdown, syntax-highlighted code blocks, and inline images persist cleanly without data truncation.
+Problems Faced During Integration
+Asynchronous Publishing Race Conditions: When authors published an article and immediately navigated to their User Profile, the new article occasionally resulted in a 404 Not Found error because background database writes were still pending.
+WYSIWYG/AST Payload Schema Discrepancies: Data format differences between the React rich-text editor output and the Java backend entity model caused broken formatting when restoring saved drafts.
+Sanitization Edge-Cases: Strict XSS security filters inadvertently stripped valid developer code syntax (like HTML tags inside tutorial code blocks) during cross-module rendering.
+What They Completed
+Automated End-to-End Content Lifecycle Test Suite covering: Draft Creation $\rightarrow$ Auto-Save $\rightarrow$ AI Trigger $\rightarrow$ Publish $\rightarrow$ Profile Update $\rightarrow$ Home Feed Rendering.
+Security & Input Sanitization Audit confirming immunity against XSS and unauthorized content modification.
+Draft Conflict & Network Interruption Recovery Tests verifying draft state safety during network drops.
+## 3. Member 3: User Profile & Live Portfolio Integration Lead
+Integration & Testing Role
+Polyglot Aggregation, Cross-Database Sync, & Fault-Tolerance Lead.
+
+Work & Scope
+Cross-Database Integration: Integrated the User Profile aggregator service across PostgreSQL identity tables (Member 4 RBAC & User Security), MongoDB article repositories (Member 1 & 2), and third-party GitHub REST APIs.
+User Data Synchronization Testing: Tested platform-wide user metadata updates, ensuring that when an author updates their username or avatar, it updates consistently across all published articles, comments, and profile views.
+Resilience & Fault-Tolerance Testing: Simulated external API outages (e.g., GitHub API returning HTTP 429 Rate Exceeded or 503 Service Unavailable) to verify system grace under failure.
+Problems Faced During Integration
+Cascading API Latency: Fetching profile data across SQL, MongoDB, and GitHub in sequence resulted in unacceptable integration test load times (>2 seconds).
+External Dependency Fragility: Unhandled GitHub API rate limits during full system testing caused entire profile pages to throw HTTP 500 errors instead of cleanly displaying the user's local articles and bio.
+Orphaned Document References: Deleting a user in Member 4's Moderator Dashboard left orphaned author IDs and dead profile links in MongoDB article collections.
+What They Completed
+Cross-Database Integration Test Suite verifying parallel fetching across PostgreSQL and MongoDB.
+Resilience4j Circuit Breaker Test Suite proving that profiles load gracefully using fallback mock data when third-party services fail.
+User Identity Sync & Cascading Deletion Verification Suite ensuring clean data integrity upon account updates or removals.
+## 4. Member 4: Moderator Dashboard & System Governance Integration Lead
+Integration & Testing Role
+Global Security, RBAC Authorization, & System Governance Lead.
+
+Work & Scope
+Global Access Control Enforcement: Integrated Moderator Dashboard security policies across all application routes, endpoints, and microservices to enforce Role-Based Access Control (RBAC).
+Authorization Penetration Testing: Attempted privilege escalation scenarios (e.g., standard Student Authors forging tokens to access admin endpoints, or Guest Readers attempting write APIs).
+Real-Time Moderation Propagation Testing: Verified that when a moderator hides a post or suspends an author, active user sessions, home feeds, editor access, and profile showcases immediately reflect the restriction.
+Problems Faced During Integration
+Stateless JWT Revocation Delays: Suspended users could still perform editor writes or profile updates until their stateless JWT token expired. Required integrating a token blacklist validation check on sensitive write actions.
+Unhandled Null References on Client UI: When a moderator hid a post that another user was currently reading, the reader’s browser threw unhandled JavaScript exceptions upon attempting to interact with the hidden post.
+Audit Log Data Gaps: Admin audit trails were missing target metadata when moderation actions coincided with asynchronous background processing from the AI service.
+What They Completed
+Global Security & Authorization Matrix Test Suite verifying access boundaries across all roles (Guest, Student Author, Moderator).
+End-to-End Governance Pipeline Test Suite covering: Content Flagging $\rightarrow$ Mod Queue Review $\rightarrow$ Article Hide $\rightarrow$ Token Invalidation $\rightarrow$ Global Feed Eviction.
+Admin Audit Trail Suite ensuring every administrative action is immutably logged with accurate metadata.
+## 5. Member 5: AI Microservice & Inter-Service Integration Lead
+Integration & Testing Role
+Inter-Service Communication, Microservice Orchestration, & Async Reliability Lead.
+
+Work & Scope
+Inter-Service REST/gRPC Integration: Connected the isolated Python AI microservice with the central Java Spring Boot backend, establishing communication contracts and serialization rules.
+Microservice Contract Testing: Validated request/response payload structures, timeout policies, fallback triggers, and retry handlers between Java and Python environments.
+Chaos & Queue Stress Testing: Tested batch article processing queues under high volume to evaluate Python container memory management, thread pool limits, and backend non-blocking behavior.
+Problems Faced During Integration
+Data Serialization Mismatches: Type mismatches between Python data models and Java Data Transfer Objects (DTOs)—such as tag lists being formatted as comma-separated strings instead of JSON arrays—caused inter-service parsing errors.
+Microservice Timeouts & Resource Spikes: Heavy long-form technical posts caused the Python LLM service to exceed standard HTTP client timeout limits, causing the Java backend to drop connection sockets.
+Silent Queue Deadlocks: If the AI microservice crashed mid-processing, the Java backend occasionally remained stuck in a PENDING_SUMMARY state indefinitely.
+What They Completed
+Inter-Service Contract Test Suite guaranteeing payload alignment between Python and Java services.
+Non-Blocking Asynchronous Resilience Suite proving that platform articles publish successfully 100% of the time, even if the AI microservice is offline or timing out.
+AI Processing Queue Stress & Recovery Test Suite validating system performance under continuous bulk processing load.
+Overall System Integration Summary
+During the final Full System Acceptance Testing, all 5 team members executed unified end-to-end user journeys:
+
+[Author Writes Article (Mem 2)] ──> [Triggers Async AI Tags/Summary (Mem 5)]
+                                             │
+                                             ▼
+[Article Appears on Home Feed (Mem 1)] <── [Database Persistence (Polyglot)]
+                                             │
+                                             ▼
+[Visible on User Portfolio (Mem 3)] <─── [Subject to Mod Controls (Mem 4)]
+By dividing integration testing by architectural responsibility, the team successfully transformed five independently built modules into a secure, high-performance, and resilient developer platform.
+
