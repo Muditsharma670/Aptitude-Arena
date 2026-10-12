@@ -403,98 +403,188 @@ Module	Team Member Scope	Primary Focus	Key Deliverable
 4. Moderator Dashboard	End-to-End	RBAC Security, Content Flags, Admin Logs	Governance Portal, Access Controls
 5. AI Functionality	End-to-End	LLM Microservice, Text Parsing, Async Jobs	Automated Summarizer, Smart Tag Generator
 
-# Week 9
-When moving from individual module development to System Integration & End-to-End (E2E) Testing, the focus shifts from isolated unit testing to verifying cross-module data flows, inter-service contracts, security enforcement, performance SLAs, and system resilience.
+# Week 9: Test Submission, Results & Dashboard Integration
 
-In this phase, each team member takes on an Integration & Testing Lead role for their respective domain, working together to ensure all five modules function as a unified, production-ready system.
+This phase connects the practice-test workflow with answer evaluation and the results interface. The objective is to ensure that the user can attempt questions, submit a test, and review the outcome through the integrated application.
 
-## 1. Member 1: Home Page & Search Engine Integration Lead
-Integration & Testing Role
-Feed Synchronization, Search Contract, & High-Traffic Load Testing Lead.
+## 1. Team Member Contributions
 
-Work & Scope
-Cross-Module Feed Integration: Integrated the Home Page feed with Member 2's published articles, Member 4's moderation status flags (ensuring hidden posts instantly disappear), and Member 5's AI-generated summaries and tags.
-API Contract Testing: Verified that the JSON response schemas sent by the Java backend match the feed state expected by the React frontend across all device viewports.
-Performance & Load Testing: Conducted simulated stress testing (using tools like JMeter or K6) to measure search latency, pagination speeds, and server resource usage under hundreds of concurrent virtual readers.
-Problems Faced During Integration
-Stale Cache & Search Index Lag: Newly published articles from Member 2's Editor took several minutes to appear in Home search results due to outdated cache invalidation rules.
-Null Pointer Rendering Crashes: When rendering article cards that were still undergoing AI summary generation by Member 5, the frontend feed crashed due to missing or null summary fields.
-Moderation Status Leakage: Articles flagged or hidden by Member 4 in the Moderator Dashboard were still appearing in search results because search indexes were not refreshing upon moderation state changes.
-What They Completed
-Unified Search & Feed Integration Test Suite validating search filters, multi-tag queries, and pagination.
-Automated Cache Invalidation Hooks connecting Editor publishing and Moderator actions directly to home feed cache clears.
-Load & Performance Benchmark Report proving the Home feed responds within target SLAs (<200ms) under heavy concurrent read traffic.
-## 2. Member 2: Editor & Content Pipeline Integration Lead
-Integration & Testing Role
-Write Pipeline, End-to-End Content Lifecycle, & Security Audit Lead.
+### Member 1: Authentication and Profile Management
+- Verified that authentication and user-session handling remained consistent while navigating between application pages.
+- Reviewed access to features that require authentication.
 
-Work & Scope
-Pipeline Orchestration: Connected the Editor’s publish action to automatically trigger Member 5's AI summary generation queue, update Member 1's Home feed indexes, and increment Member 3's author statistics.
-Security & Penetration Testing: Executed security tests targeting Cross-Site Scripting (XSS), script injection through code blocks, and unauthorized edit/delete payload manipulations.
-Data Consistency Verification: Ensured complex documents containing custom Markdown, syntax-highlighted code blocks, and inline images persist cleanly without data truncation.
-Problems Faced During Integration
-Asynchronous Publishing Race Conditions: When authors published an article and immediately navigated to their User Profile, the new article occasionally resulted in a 404 Not Found error because background database writes were still pending.
-WYSIWYG/AST Payload Schema Discrepancies: Data format differences between the React rich-text editor output and the Java backend entity model caused broken formatting when restoring saved drafts.
-Sanitization Edge-Cases: Strict XSS security filters inadvertently stripped valid developer code syntax (like HTML tags inside tutorial code blocks) during cross-module rendering.
-What They Completed
-Automated End-to-End Content Lifecycle Test Suite covering: Draft Creation $\rightarrow$ Auto-Save $\rightarrow$ AI Trigger $\rightarrow$ Publish $\rightarrow$ Profile Update $\rightarrow$ Home Feed Rendering.
-Security & Input Sanitization Audit confirming immunity against XSS and unauthorized content modification.
-Draft Conflict & Network Interruption Recovery Tests verifying draft state safety during network drops.
-## 3. Member 3: User Profile & Live Portfolio Integration Lead
-Integration & Testing Role
-Polyglot Aggregation, Cross-Database Sync, & Fault-Tolerance Lead.
+### Member 2: Exam and Subject Management
+- Integrated the selected examination and subject information with the practice workflow.
+- Checked that the correct examination details were maintained during test navigation.
 
-Work & Scope
-Cross-Database Integration: Integrated the User Profile aggregator service across PostgreSQL identity tables (Member 4 RBAC & User Security), MongoDB article repositories (Member 1 & 2), and third-party GitHub REST APIs.
-User Data Synchronization Testing: Tested platform-wide user metadata updates, ensuring that when an author updates their username or avatar, it updates consistently across all published articles, comments, and profile views.
-Resilience & Fault-Tolerance Testing: Simulated external API outages (e.g., GitHub API returning HTTP 429 Rate Exceeded or 503 Service Unavailable) to verify system grace under failure.
-Problems Faced During Integration
-Cascading API Latency: Fetching profile data across SQL, MongoDB, and GitHub in sequence resulted in unacceptable integration test load times (>2 seconds).
-External Dependency Fragility: Unhandled GitHub API rate limits during full system testing caused entire profile pages to throw HTTP 500 errors instead of cleanly displaying the user's local articles and bio.
-Orphaned Document References: Deleting a user in Member 4's Moderator Dashboard left orphaned author IDs and dead profile links in MongoDB article collections.
-What They Completed
-Cross-Database Integration Test Suite verifying parallel fetching across PostgreSQL and MongoDB.
-Resilience4j Circuit Breaker Test Suite proving that profiles load gracefully using fallback mock data when third-party services fail.
-User Identity Sync & Cascading Deletion Verification Suite ensuring clean data integrity upon account updates or removals.
-## 4. Member 4: Moderator Dashboard & System Governance Integration Lead
-Integration & Testing Role
-Global Security, RBAC Authorization, & System Governance Lead.
+### Member 3: Question Bank and Practice Engine
+- Verified question retrieval and the display of MCQ options.
+- Checked question selection, answer recording, and the transition from practice to submission.
 
-Work & Scope
-Global Access Control Enforcement: Integrated Moderator Dashboard security policies across all application routes, endpoints, and microservices to enforce Role-Based Access Control (RBAC).
-Authorization Penetration Testing: Attempted privilege escalation scenarios (e.g., standard Student Authors forging tokens to access admin endpoints, or Guest Readers attempting write APIs).
-Real-Time Moderation Propagation Testing: Verified that when a moderator hides a post or suspends an author, active user sessions, home feeds, editor access, and profile showcases immediately reflect the restriction.
-Problems Faced During Integration
-Stateless JWT Revocation Delays: Suspended users could still perform editor writes or profile updates until their stateless JWT token expired. Required integrating a token blacklist validation check on sensitive write actions.
-Unhandled Null References on Client UI: When a moderator hid a post that another user was currently reading, the reader’s browser threw unhandled JavaScript exceptions upon attempting to interact with the hidden post.
-Audit Log Data Gaps: Admin audit trails were missing target metadata when moderation actions coincided with asynchronous background processing from the AI service.
-What They Completed
-Global Security & Authorization Matrix Test Suite verifying access boundaries across all roles (Guest, Student Author, Moderator).
-End-to-End Governance Pipeline Test Suite covering: Content Flagging $\rightarrow$ Mod Queue Review $\rightarrow$ Article Hide $\rightarrow$ Token Invalidation $\rightarrow$ Global Feed Eviction.
-Admin Audit Trail Suite ensuring every administrative action is immutably logged with accurate metadata.
-## 5. Member 5: AI Microservice & Inter-Service Integration Lead
-Integration & Testing Role
-Inter-Service Communication, Microservice Orchestration, & Async Reliability Lead.
+### Member 4: Test Attempts, Scoring and Results
+- Integrated the test-submission confirmation flow with the results interface.
+- Checked score display, answer review, and explanations.
 
-Work & Scope
-Inter-Service REST/gRPC Integration: Connected the isolated Python AI microservice with the central Java Spring Boot backend, establishing communication contracts and serialization rules.
-Microservice Contract Testing: Validated request/response payload structures, timeout policies, fallback triggers, and retry handlers between Java and Python environments.
-Chaos & Queue Stress Testing: Tested batch article processing queues under high volume to evaluate Python container memory management, thread pool limits, and backend non-blocking behavior.
-Problems Faced During Integration
-Data Serialization Mismatches: Type mismatches between Python data models and Java Data Transfer Objects (DTOs)—such as tag lists being formatted as comma-separated strings instead of JSON arrays—caused inter-service parsing errors.
-Microservice Timeouts & Resource Spikes: Heavy long-form technical posts caused the Python LLM service to exceed standard HTTP client timeout limits, causing the Java backend to drop connection sockets.
-Silent Queue Deadlocks: If the AI microservice crashed mid-processing, the Java backend occasionally remained stuck in a PENDING_SUMMARY state indefinitely.
-What They Completed
-Inter-Service Contract Test Suite guaranteeing payload alignment between Python and Java services.
-Non-Blocking Asynchronous Resilience Suite proving that platform articles publish successfully 100% of the time, even if the AI microservice is offline or timing out.
-AI Processing Queue Stress & Recovery Test Suite validating system performance under continuous bulk processing load.
-Overall System Integration Summary
-During the final Full System Acceptance Testing, all 5 team members executed unified end-to-end user journeys:
+### Member 5: Dashboard and System Integration
+- Connected navigation between the examination, practice, dashboard, and results sections.
+- Reviewed frontend-backend integration and the consistency of API responses.
 
-[Author Writes Article (Mem 2)] ──> [Triggers Async AI Tags/Summary (Mem 5)]
-                                             │
-                                             ▼
-[Article Appears on Home Feed (Mem 1)] <── [Database Persistence (Polyglot)]
+## 2. Problems Faced
+
+- The submission flow required debugging after backend integration.
+- API responses and frontend navigation needed to remain consistent during test completion.
+- Question selection and result display needed verification across different exam categories.
+
+## 3. What Was Completed
+
+- Integrated the practice-test submission flow and results interface.
+- Connected the frontend with the Java Spring Boot backend.
+- Verified exam and question retrieval through the available APIs.
+- Reviewed the user workflow from question selection through submission and result display.
+
+**Next Week:** Perform complete system integration testing, fix remaining defects, and optimize API performance.
+
+---
+
+# Week 10: System Integration, Testing and Performance Optimization
+
+This phase focuses on testing the integrated application and resolving issues across the React frontend, Spring Boot backend, and Supabase PostgreSQL database.
+
+## 1. Team Member Contributions
+
+### Member 1: Authentication Testing
+- Checked registration and login flows.
+- Reviewed authentication failures and access restrictions.
+
+### Member 2: Exam and Subject Testing
+- Verified exam and subject retrieval.
+- Checked examination selection and exam-subject mappings.
+
+### Member 3: Question Bank Testing
+- Validated question retrieval and answer-option structure.
+- Checked available questions, subject filters, and practice-test configuration.
+
+### Member 4: Submission and Results Testing
+- Tested submission, score display, and answer review.
+- Checked consistency between submitted responses and displayed results.
+
+### Member 5: Integration and Performance Testing
+- Tested frontend-backend communication and production API responses.
+- Investigated connectivity, authorization, and response-time issues.
+
+## 2. Problems Faced
+
+- Some API requests experienced authorization or connectivity errors.
+- Question retrieval was initially slow.
+- Integration changes required regression testing to ensure that existing features continued working.
+
+## 3. What Was Completed
+
+- Tested examination retrieval, subject selection, question loading, submission, and results.
+- Improved question API performance during local testing: the measured response time decreased from approximately 41.2 seconds to 0.64 seconds.
+- Reviewed error handling and the consistency of API responses.
+- Prepared the application for production deployment.
+
+**Next Week:** Deploy the application, review security configuration, and prepare the final project report, presentation, and demonstration video.
+
+---
+
+# Week 11: Cloud Deployment and Security Verification
+
+This phase focuses on making Aptitude Arena accessible online and verifying the production configuration.
+
+## 1. Team Member Contributions
+
+### Member 1: Authentication and Security
+- Reviewed JWT configuration and authentication behaviour.
+- Checked that signing secrets were kept in environment variables rather than frontend code.
+
+### Member 2: Exam API Deployment Verification
+- Verified that the deployed examination API returned the expected JSON response.
+- Checked exam and subject retrieval using the public backend endpoint.
+
+### Member 3: Question Bank Verification
+- Reviewed the question-bank records and exam-question mappings.
+- Checked that the deployed backend could retrieve stored practice data.
+
+### Member 4: Test and Results Verification
+- Reviewed the practice-test submission and results workflow.
+- Identified any remaining production issues requiring correction.
+
+### Member 5: Deployment and Documentation
+- Prepared the backend deployment copy and uploaded it to GitHub.
+- Deployed the Java Spring Boot backend on Render.
+- Reviewed environment-variable configuration and prepared supporting project documentation.
+
+## 2. Problems Faced
+
+- Database connection settings and JWT environment variables needed correct production configuration.
+- The first deployment encountered startup configuration errors that required troubleshooting.
+- The published frontend and public backend needed to use the correct production API URL.
+
+## 3. What Was Completed
+
+- Deployed the Spring Boot backend on Render.
+- Verified that the public `/api/exams` endpoint returned HTTP 200 and examination records.
+- Published the frontend through Google AI Studio.
+- Prepared the project report, presentation, and demonstration materials.
+
+**Next Week:** Perform final public-site testing, prepare demonstration evidence, and conduct the project viva.
+
+---
+
+# Week 12: Final Testing, Project Demonstration and Viva
+
+This final phase verifies the application as a complete system and prepares the team to demonstrate its functionality and technical architecture.
+
+## 1. Team Member Contributions
+
+### Member 1: Authentication Demonstration
+- Demonstrates the authentication flow and explains user access control.
+- Explains the relevant frontend, backend, and database components.
+
+### Member 2: Examination Catalogue Demonstration
+- Demonstrates examination selection and subject retrieval.
+- Explains the exam and subject APIs and their database relationships.
+
+### Member 3: Question Bank Demonstration
+- Demonstrates MCQ retrieval and the practice interface.
+- Explains the question and option tables and question-retrieval APIs.
+
+### Member 4: Test Submission and Results Demonstration
+- Demonstrates completing and submitting a practice test.
+- Explains answer evaluation, score display, and the related backend services.
+
+### Member 5: Integration and Deployment Demonstration
+- Demonstrates the published website and live backend API.
+- Explains the system architecture, deployment configuration, and integration testing.
+
+## 2. Problems Faced
+
+- The final deployment required verification of frontend-backend connectivity.
+- The team needed to ensure that demonstrated features matched their actual implementation.
+- Project documentation and supporting evidence needed to be organized for the final evaluation.
+
+## 3. What Was Completed
+
+- Reviewed the published application and its principal user workflows.
+- Verified the live exam API and the retrieval of examination records.
+- Prepared the project overview, technical explanations, and demonstration sequence.
+- Organized the frontend and backend repositories and the project documentation for evaluation.
+
+## Final Project Outcome
+
+Aptitude Arena demonstrates a full-stack competitive examination practice platform built with React and TypeScript, Java Spring Boot REST APIs, and Supabase PostgreSQL. The application includes six examination categories and 600 generated practice questions, with an integrated workflow for question practice, test submission, and results review.
+
+**Live Website:** https://aptitude-arena.ai.studio/
+
+**Frontend Repository:** https://github.com/rkrishnaveersingh/aptitude-arena
+
+**Backend Repository:** https://github.com/rkrishnaveersingh/aptitude-arena-backend-render
+
+**Live Backend API:** https://aptitude-arena-backend-render.onrender.com/api/exams
+
+*Note: Replace module responsibilities or completion statements where necessary so the README accurately reflects the work actually performed by each team member. Generated practice questions should not be described as verified official previous-year questions.*
                                              │
                                              ▼
 [Visible on User Portfolio (Mem 3)] <─── [Subject to Mod Controls (Mem 4)]
