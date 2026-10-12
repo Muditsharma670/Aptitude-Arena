@@ -37,7 +37,6 @@ Aptitude Arena enforces strict authentication and role management at the API lay
 
 ## SRS Document
 You can access the Project SRS [https://1drv.ms/b/c/762dc0e747d4c238/IQCMhlrBCAvIS7UA2KdzgDIJAYt8shqe_3SUruQnmLF1ERM?e=VcytoV)
-
 ## Architecture & Core Modules
 The Aptitude Arena architecture operates as a distributed full-stack system, with a Spring Boot Java backend acting as the core REST API provider, a React + TypeScript (Vite) interactive frontend client, and a Supabase PostgreSQL persistent database.
 
