@@ -490,7 +490,7 @@ This phase focuses on testing the integrated application and resolving issues ac
 
 # Week 11: Cloud Deployment and Security Verification
 
-📄 **Research Paper:** [Download Official Project Document (DOCX)](./document.docx)
+📄 **Research Paper:** [View Official Project Document Online](./document.pdf)
 
 This phase focuses on making Aptitude Arena accessible online and verifying the production configuration.
 
