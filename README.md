@@ -7,7 +7,7 @@
 * **Project Guide:** Er. Ram Babu Buri
   * **Research Area:** Machine Learning & Data Science
   * **Specializations:** Java, JSP–Servlet, Spring Boot, MySQL, Python
-  * **Project Link:**https://aptitude-arena.ai.studio 
+ 
 ### Team Members
 
 | Name | Roll No. | Enrollment No. | Email | Mobile |
