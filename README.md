@@ -578,6 +578,16 @@ This final phase verifies the application as a complete system and prepares the 
 
 Aptitude Arena demonstrates a full-stack competitive examination practice platform built with React and TypeScript, Java Spring Boot REST APIs, and Supabase PostgreSQL. The application includes six examination categories and 600 generated practice questions, with an integrated workflow for question practice, test submission, and results review.
 
+
+
+
+
+
+📊 [Project Presentation (PPT)](https://1drv.ms/b/c/6EC998A8B8C3E846/IQCjYZidXy4QQ5OVmGqNf5lbAX3iX9FN2yg70OyGlExk6p4)
+
+
+
+
 📄 [Research Paper](https://1drv.ms/b/c/6EC998A8B8C3E846/IQCbRWioZuMYS7EmNzZG805tAacJojjI-zLRM466EA6klyA)
 
 
