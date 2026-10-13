@@ -1,6 +1,6 @@
 # Aptitude Arena
 # week 1
-📄 **Research Paper:** [View Aptitude Arena Research Paper (PDF)](https://github.com/MuditSharma670/Aptitude-Arena/blob/main/document.pdf?raw=true)
+
 
 ## Project Administration
 
@@ -491,7 +491,7 @@ This phase focuses on testing the integrated application and resolving issues ac
 
 # Week 11: Cloud Deployment and Security Verification
 
-📄 **Research Paper:** [View Official Project Document Online](./document.pdf)
+
 
 This phase focuses on making Aptitude Arena accessible online and verifying the production configuration.
 
@@ -578,6 +578,7 @@ This final phase verifies the application as a complete system and prepares the 
 
 Aptitude Arena demonstrates a full-stack competitive examination practice platform built with React and TypeScript, Java Spring Boot REST APIs, and Supabase PostgreSQL. The application includes six examination categories and 600 generated practice questions, with an integrated workflow for question practice, test submission, and results review.
 
+📄 [Research Paper](https://1drv.ms/b/c/6EC998A8B8C3E846/IQCbRWioZuMYS7EmNzZG805tAacJojjI-zLRM466EA6klyA)
 **Live Website:** https://aptitude-arena.ai.studio/
 
 **Frontend Repository:** https://github.com/rkrishnaveersingh/aptitude-arena
@@ -585,6 +586,7 @@ Aptitude Arena demonstrates a full-stack competitive examination practice platfo
 **Backend Repository:** https://github.com/rkrishnaveersingh/aptitude-arena-backend-render
 
 **Live Backend API:** https://aptitude-arena-backend-render.onrender.com/api/exams
+
 
 *Note: Replace module responsibilities or completion statements where necessary so the README accurately reflects the work actually performed by each team member. Generated practice questions should not be described as verified official previous-year questions.*
                                              │
