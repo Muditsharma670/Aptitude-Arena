@@ -1,5 +1,6 @@
 # Aptitude Arena
 # week 1
+📄 **Research Paper:** [View Aptitude Arena Research Paper (PDF)](https://github.com/MuditSharma670/Aptitude-Arena/blob/main/document.pdf?raw=true)
 
 ## Project Administration
 
